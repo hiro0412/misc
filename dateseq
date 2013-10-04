@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'date'
+require 'optparse'
+
+format = '%Y-%m-%d'
+
+optparse = OptionParser.new
+optparse.on('--format=VAL'){|v| format = v }
+argv = optparse.parse(ARGV)
+
+if argv.length == 1
+  fromdate = Date.parse(argv[0])
+  todate = fromdate
+
+elsif argv.length >= 2
+  fromdate = Date.parse(argv[0])
+  todate = Date.parse(argv[1])
+
+else 
+  puts 'error!'
+  exit 1
+end
+
+(fromdate..todate).each{|date|
+  puts date.strftime(format)
+}
